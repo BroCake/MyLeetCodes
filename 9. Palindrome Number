@@ -3,43 +3,19 @@ import java.util.Stack;
 class Solution {
   
     public boolean isPalindrome(int x) {
+        boolean ans = false;
+        int tmp, norm = x, rev = 0;
 
-        boolean ans = true;
-        if (x < 0) {
-            return false;
+
+        while (x > 0) {
+            tmp = x % 10;
+            rev = rev*10 + tmp;
+            x /= 10;
         }
 
-        int a = x, digits = 0;
-        Stack<Integer> stk = new Stack<>();
-
-        while (a > 0) {
-            a /= 10;
-            digits++;
+        if (norm == rev) {
+            ans = true;
         }
-
-        int b = digits / 2;
-        a = x;
-
-        while (b > 0) {
-            stk.push(a % 10);
-            a /= 10;
-            b--;
-        }
-
-        if (digits % 2 == 1) {
-            stk.push(a % 10);
-        }
-
-        while (a > 0) {
-
-            if (a % 10 != stk.pop()) {
-                ans = false;
-                a = 0;
-            }
-            a /= 10;
-        }
-
-        System.out.println(ans);
         return ans;
     }
 }
